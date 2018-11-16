@@ -23,8 +23,7 @@ public class Book {
 
     @Column(length=32)
     private String isbn;
-    
-    @Column(length=255)
+
     private String title;
 
     @Column(length=128)

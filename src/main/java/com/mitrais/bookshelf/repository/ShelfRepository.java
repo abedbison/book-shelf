@@ -12,5 +12,5 @@ import com.mitrais.bookshelf.entity.Shelf;
 public interface ShelfRepository extends JpaRepository<Shelf, Integer>{
 
     @Query("SELECT s FROM Shelf s, IN(s.book) b WHERE b.id = ?1")
-    public Optional<Shelf> findShelfByBookId(Integer bookId);
+    Optional<Shelf> findShelfByBookId(Integer bookId);
 }

@@ -54,14 +54,14 @@ public class BookControllerTest {
     }
     
     @Test
-    public void noHomePostMethodTest() throws Exception {
+    public void failPostMethodTest() throws Exception {
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .post(reqMapping)
                 .accept(MediaType.APPLICATION_JSON);
     
         mockMvc.perform(requestBuilder)
-                .andExpect(status().isMethodNotAllowed());
+                .andExpect(status().isBadRequest());
     }
 
     @Test

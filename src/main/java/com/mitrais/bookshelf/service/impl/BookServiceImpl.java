@@ -48,6 +48,17 @@ public class BookServiceImpl implements BookService<Book, Integer> {
     public List<Book> findByTitleAndStatus(String title, BookStatus status) {
         return bookRepository.findByTitleAndStatus(title, status);
     }
+
+    @Override
+    public Book save(Book t) {
+        return bookRepository.save(t);
+    }
     
+    @Override
+    public void delete(Integer id) {
+        bookRepository.findById(id).ifPresent(book -> {
+            bookRepository.delete(book);
+        });
+    }
 
 }

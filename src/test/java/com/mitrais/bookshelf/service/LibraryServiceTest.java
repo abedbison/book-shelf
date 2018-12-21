@@ -5,10 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,7 +45,8 @@ public class LibraryServiceTest {
         Book b = bookRepository.findById(1).get();
         Book rtnB = libraryService.addBook(1, b);
         
-        verify(bookRepository, Mockito.times(1)).save(Mockito.any(Book.class));
+        // NOTES
+        verify(bookRepository).save(Mockito.any(Book.class));
         verify(shelfRepository, Mockito.times(1)).save(Mockito.any(Shelf.class));
         
         assertEquals(BookStatus.SHELVED.name(), rtnB.getStatus().name());
@@ -71,14 +69,14 @@ public class LibraryServiceTest {
         verify(shelfRepository, Mockito.never()).save(Mockito.any(Shelf.class));
 
         assertEquals(BookStatus.NOT_SHELVED.name(), rtnB.getStatus().name());
-        assertNotNull(rtnB.getMessage());
+        assertNotNull(rtnB.getMessage()); // NOTE : 'messagenya keluarin untuk assert'
     }
 
     @Test
     public void removeBookTest() {
         
         Book tBook = new Book(1, "1000", "One Thousand Miles","Jannie Doe", BookStatus.SHELVED);
-        Set<Book> tSet = new HashSet<>(Arrays.asList(tBook));
+        Set<Book> tSet = new HashSet<>(Collections.singletonList(tBook));
 
         when(bookRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(
                 tBook));

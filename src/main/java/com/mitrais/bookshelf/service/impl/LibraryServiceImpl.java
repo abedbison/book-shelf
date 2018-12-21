@@ -103,4 +103,16 @@ public class LibraryServiceImpl implements LibraryService<Shelf, Integer> {
         return oBook.orElse(b);
     }
 
+    @Override
+    public Shelf save(Shelf t) {
+        return shelfRepository.save(t);
+    }
+    
+    @Override
+    public void delete(Integer id) {
+        shelfRepository.findById(id).ifPresent(shelf -> {
+            shelfRepository.delete(shelf);
+        });
+    }
+
 }

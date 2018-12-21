@@ -3,6 +3,8 @@ package com.mitrais.bookshelf.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import com.mitrais.bookshelf.service.LibraryService;
 
 @RestController
 @RequestMapping("/library")
+@CrossOrigin(origins="*")
 public class LibraryController {
 
     private LibraryService<Shelf, Integer> libraryService;
@@ -51,6 +54,16 @@ public class LibraryController {
         return libraryService.removeBook(book);
     }
     
-
+    @PostMapping
+    public Shelf save(@RequestBody Shelf s) {
+        return libraryService.save(s);
+    }
+    
+    @DeleteMapping
+    @PostMapping("/delete")
+    public Shelf delete(@RequestBody Shelf s) {
+        libraryService.delete(s.getId());
+        return s;
+    }
     
 }

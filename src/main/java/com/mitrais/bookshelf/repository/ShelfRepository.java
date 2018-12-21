@@ -11,6 +11,10 @@ import com.mitrais.bookshelf.entity.Shelf;
 @Repository
 public interface ShelfRepository extends JpaRepository<Shelf, Integer>{
 
-    @Query("SELECT s FROM Shelf s, IN(s.book) b WHERE b.id = ?1")
+    // NOTES: native Query = query dari databasenya, not recomended, why?
+    // ketika ganti database bisa jadi 'support'
+    // JPQL
+    @Query(value="SELECT s FROM Shelf s, IN(s.book) b WHERE b.id = ?1", nativeQuery=false
+            )
     Optional<Shelf> findShelfByBookId(Integer bookId);
 }

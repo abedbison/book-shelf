@@ -16,7 +16,7 @@ import javax.persistence.JoinColumn;
 public class Shelf {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     
     @Column(name="max_capacity")
